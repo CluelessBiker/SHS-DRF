@@ -1,8 +1,12 @@
-from rest_Framework import serializers
+from rest_framework import serializers
 from .models import Location
 
 class LocationSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    is_admin = serializers.SerializerMethodField()
+
+    def get_is_admin(self, obj):
+        request = self.context['request']
+        return request.user == request.user.is_staff
 
     class Meta:
         """
@@ -23,4 +27,5 @@ class LocationSerializer(serializers.ModelSerializer):
             'gRating',
             'gMap',
             'image',
+            'is_admin',
         ]
