@@ -2,8 +2,6 @@ from rest_framework import serializers
 from .models import Location
 
 class LocationSerializer(serializers.ModelSerializer):
-    is_admin = serializers.SerializerMethodField()
-
     def validate_image(self, value):
         """
         Check image size
@@ -19,13 +17,6 @@ class LocationSerializer(serializers.ModelSerializer):
                 'Image width larger than 4096px!'
             )
         return value
-
-    def get_is_admin(self, obj):
-        """
-        Check if user is an admin user
-        """
-        request = self.context['request']
-        return request.user == request.user.is_staff
 
     class Meta:
         """
@@ -46,5 +37,4 @@ class LocationSerializer(serializers.ModelSerializer):
             'gRating',
             'gMap',
             'image',
-            'is_admin',
         ]
