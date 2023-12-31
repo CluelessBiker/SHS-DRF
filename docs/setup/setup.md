@@ -15,3 +15,4 @@
 - ```pip install django-cloudinary-storage==0.3.0```
 - ```python -m pip install Pillow ```
 - ```pip3 install djangorestframework```
+- ```python3 manage.py startapp AppNameHere```
