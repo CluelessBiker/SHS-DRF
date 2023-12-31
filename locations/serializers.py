@@ -38,3 +38,4 @@ class LocationSerializer(serializers.ModelSerializer):
             'gMap',
             'image',
         ]
+# TODO: add locationDetailsSerializer????
