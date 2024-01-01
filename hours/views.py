@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, status
+from rest_framework.response import Response
 from shs_drf.permissions import IsAdminOrReadOnly
 from .models import Hour
 from .serializers import HourSerializer, HourDetailSerializer
@@ -31,6 +32,7 @@ class HourList(generics.ListCreateAPIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+        serializer.save()
 
 class HourDetail(generics.RetrieveUpdateDestroyAPIView):
     """
