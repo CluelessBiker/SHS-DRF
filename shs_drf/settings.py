@@ -52,8 +52,9 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
 
-    'locations',
     'hours',
+    'locations',
+    'practitioners',
     'services',
 ]
 
