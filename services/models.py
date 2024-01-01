@@ -28,5 +28,3 @@ class Service(models.Model):
     def __str__(self):
         """ Display text """
         return f"{self.title}"
-
-
