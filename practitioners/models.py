@@ -8,15 +8,15 @@ class Practitioner(models.Model):
     Practitioner details
     """
     locations = models.ManyToManyField(Location)
-    services = models.ManyToManyField(Services)
-    createdAt = models.DateTimeField(auto_now_Add=True)
+    services = models.ManyToManyField(Service)
+    createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
-    fName = modelsCharField(max_length=50, blank=False, null=False)
-    lName = modelsCharField(max_length=50, blank=False, null=False)
-    title = modelsCharField(max_length=50, blank=False, null=False)
-    bio = models.TextField(blank-True, null=True)
+    fName = models.CharField(max_length=50, blank=False, null=False)
+    lName = models.CharField(max_length=50, blank=False, null=False)
+    title = models.CharField(max_length=50, blank=False, null=False)
+    bio = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='imgaes/')
-    personalExperience = models.TextField()
+    personalExperience = models.TextField(blank=True, null=True)
 
     class Meta:
         """ Ordering """
