@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     'locations',
     'hours',
+    'services',
 ]
 
 MIDDLEWARE = [
