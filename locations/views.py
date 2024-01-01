@@ -23,7 +23,7 @@ class LocationList(generics.ListCreateAPIView):
         Create a new location
         """
         if serializer.is_valid():
-            if not request.user.is_staff:
+            if not self.request.user.is_staff:
                 return Response(
                     {'detail': 'You do not have permission to perform this action'},
                     status=status.HTTP_403_FORBIDDEN
@@ -46,6 +46,5 @@ class LocationDetail(generics.RetrieveUpdateDestroyAPIView):
         IsAdminOrReadOnly,
         permissions.IsAuthenticatedOrReadOnly
     ]
-#     TODO: references a serializer that does not exist... fix it
-    serializer_class = LocationDetailSerializer
+    serializer_class = LocationSerializer
     queryset = Location.objects.all()
