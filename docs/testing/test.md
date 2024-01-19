@@ -19,3 +19,7 @@
 | Contact      | Create new entry | anyone     | Entry added in DB                 | ✅         |
 | Contact      | Read entry       | admin      | View new entry                    | ✅         |
 | Contact      | Delete entry     | admin      | Entry no longer available to view | ✅         |
+| Language     | Create new entry | admin      | Entry added in DB                 |            |
+| Language     | Read entry       | admin      | View new entry                    |            |
+| Language     | Update entry     | admin      | View modifications made to entry  |            |
+| Language     | Delete entry     | admin      | Entry no longer available to view |            |
