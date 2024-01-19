@@ -12,7 +12,7 @@ class Language(models.Model):
         max_length=2,
         verbose_name="Language Code",
     )
-    name = model.CharField(
+    name = models.CharField(
         null=False,
         unique=True,
         blank=False,
