@@ -1,6 +1,7 @@
 from django.db import models
 from locations.models import Location
 from services.models import Service
+from languages.models import Language
 
 
 class Practitioner(models.Model):
@@ -17,6 +18,11 @@ class Practitioner(models.Model):
     bio = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='imgaes/')
     personalExperience = models.TextField(blank=True, null=True)
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
     class Meta:
         """ Ordering """
