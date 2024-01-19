@@ -8,6 +8,10 @@ class PractitionerSerializer(serializers.ModelSerializer):
     """
     Serializer for Practitioner models
     """
+    language = serializers.ReadOnlyField(source='language.name')
+    locations = LocationSerializer(many=True, read_only=True)
+    services = ServiceSerializer(many=True, read_only=True)
+
     def validate_image(self, value):
         """
         Check image size
@@ -38,6 +42,7 @@ class PractitionerSerializer(serializers.ModelSerializer):
             'bio',
             'image',
             'personalExperience',
+            'language',
         ]
 
 
@@ -46,8 +51,8 @@ class PractitionerDetailSerializer(PractitionerSerializer):
     Serializer for the Practitioner model used in Detail view
     Allow editing locations & services
     """
-    locations = LocationSerializer(many=True)
-    services = ServiceSerializer(many=True)
+    locations = LocationSerializer(many=True, read_only=True)
+    services = ServiceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Practitioner
