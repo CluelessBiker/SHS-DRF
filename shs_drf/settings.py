@@ -73,6 +73,7 @@ INSTALLED_APPS = [
 
     'contact',
     'hours',
+    'languages',
     'locations',
     'practitioners',
     'services',
