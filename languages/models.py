@@ -20,10 +20,10 @@ class Language(models.Model):
         verbose_name="Language name",
     )
 
-    def Meta:
+    class Meta:
         verbose_name = "Language"
         verbose_name_plural = "Languages"
-        oerdering = ['name']
+        ordering = ['name']
 
     def __str__(self):
         """ Display Text """
