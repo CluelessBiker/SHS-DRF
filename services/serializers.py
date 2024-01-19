@@ -7,6 +7,9 @@ class ServiceSerializer(serializers.ModelSerializer):
     """
     Serializer for Service models
     """
+    language = serializers.ReadOnlyField(source='language.name')
+    locations = LocationSerializer(many=True, read_only=True)
+    
     def validate_image(self, value):
             """
             Check image size
@@ -36,6 +39,7 @@ class ServiceSerializer(serializers.ModelSerializer):
             'price',
             'image',
             'duration',
+            'language',
         ]
 
 
