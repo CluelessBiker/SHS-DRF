@@ -1,4 +1,5 @@
 from django.db import models
+from languages.models import Language
 
 
 class Location(models.Model):
@@ -15,6 +16,11 @@ class Location(models.Model):
     gRating = models.URLField()
     gMap = models.URLField()
     image = models.ImageField(upload_to='images/')
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
     class Meta:
         """ Order locations by title """
