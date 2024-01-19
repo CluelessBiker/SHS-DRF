@@ -1,5 +1,6 @@
 from django.db import models
 from locations.models import Location
+from languages.models import Language
 
 
 class Service(models.Model):
@@ -20,6 +21,11 @@ class Service(models.Model):
     duration = models.TimeField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='images/')
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
     class Meta:
         """ Ordering Services by title """
