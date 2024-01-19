@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from .models import Location
 
+
 class LocationSerializer(serializers.ModelSerializer):
     def validate_image(self, value):
         """
         Check image size
         """
+        language = serializers.ReadOnlyField(source='language.name')
+
         if value.size > 2 * 1024 * 1024:
             raise serializers.ValidationError('Image size larger than 2MB!')
         if value.image.height > 4096:
@@ -37,4 +40,5 @@ class LocationSerializer(serializers.ModelSerializer):
             'gRating',
             'gMap',
             'image',
+            'language',
         ]
