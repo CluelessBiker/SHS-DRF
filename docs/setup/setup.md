@@ -24,16 +24,18 @@
 
 ### PACKAGES :
 
-```
-pip3 install 'django<4'
-pip install django-cloudinary-storage==0.3.0
-python -m pip install Pillow
-pip3 install djangorestframework
-pip install django-filter
-pip3 install dj-rest-auth==2.1.9
-pip install 'dj-rest-auth[with_social]'
-pip install djangorestframework-simplejwt
-```
+`pip3 install` the following packages :
+
+- `'django<4'`
+- `django-cloudinary-storage==0.3.0`
+- `python -m pip install Pillow`
+- `djangorestframework`
+- `django-filter`
+- `dj-rest-auth==2.1.9`
+- `'dj-rest-auth[with_social]'`
+- `djangorestframework-simplejwt`
+- `psycopg2-binary` _required for psycopg2_
+- `dj_database_url==0.5.0 psycopg2`
 
 - remember to run `pip3 freeze --local > requirements.txt` at the end of installation
 - the following packages also need to be added to `INSTALLED_APPS`:
@@ -51,6 +53,7 @@ pip install djangorestframework-simplejwt
 'dj_rest_auth.registration',
 ```
 
+- Add an import statement `import dj_database_url`
 - Add additional variables to `sesttings.py`:
 
 ```
@@ -70,6 +73,24 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 ```
 
+- update DB settings :
+
+```
+if 'DEV' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+```
+
+### URLS.PY
+
 - url paths need to be added to the project `urls.py` file as well:
 
 ```
@@ -84,4 +105,5 @@ path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
 import os
 os.environ['CLOUDINARY_URL'] = 'cloudinary://yourAPIEnvironmentVariable'
 os.environ['DEV'] = '1'
+os.environ['DATABASE_URL'] = "postgres://yourElephantSQLinkHere"
 ```
