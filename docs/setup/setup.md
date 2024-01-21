@@ -36,6 +36,7 @@
 - `djangorestframework-simplejwt`
 - `psycopg2-binary` _required for psycopg2_
 - `dj_database_url==0.5.0 psycopg2`
+- `gunicorn django-cors-headers` _required to deploy on Heroku_
 
 - remember to run `pip3 freeze --local > requirements.txt` at the end of installation
 - the following packages also need to be added to `INSTALLED_APPS`:
@@ -51,6 +52,7 @@
 'allauth.account',
 'allauth.socialaccount',
 'dj_rest_auth.registration',
+'corsheaders',
 ```
 
 - Add an import statement `import dj_database_url`
@@ -71,6 +73,7 @@ REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 ```
 
 - update DB settings :
@@ -89,7 +92,39 @@ else:
     }
 ```
 
-### URLS.PY
+- update `ALLOWED_HOSTS = ['localhost', 'shs-drf.herokuapp.com']`
+
+- add line to top of `MIDDLEWARE` array :
+
+```
+'corsheaders.middleware.CorsMiddleware',
+```
+
+- below `MIDDLEWARE` add `ALLOWED_ORIGINS`
+
+```
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
+
+CORS_ALLOW_CREDENTIALS = True
+```
+
+### SETTINGS.PY :
+
+- update the following variables:
+
+```
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = 'DEV' in os.environ
+```
+
+### URLS.PY :
 
 - url paths need to be added to the project `urls.py` file as well:
 
@@ -106,4 +141,15 @@ import os
 os.environ['CLOUDINARY_URL'] = 'cloudinary://yourAPIEnvironmentVariable'
 os.environ['DEV'] = '1'
 os.environ['DATABASE_URL'] = "postgres://yourElephantSQLinkHere"
+os.environ['SECRET_KEY'] = "nice try"
+```
+
+### PROCFILE :
+
+- create a `Procfile`
+- in it, save:
+
+```
+release: python manage.py makemigrations && python manage.py migrate
+web: gunicorn projectName.wsgi
 ```
