@@ -36,7 +36,8 @@
 - `djangorestframework-simplejwt`
 - `psycopg2-binary` _required for psycopg2_
 - `dj_database_url==0.5.0 psycopg2`
-- `gunicorn django-cors-headers` _required to deploy on Heroku_
+- `gunicorn`
+- `django-cors-headers`
 
 - remember to run `pip3 freeze --local > requirements.txt` at the end of installation
 - the following packages also need to be added to `INSTALLED_APPS`:
@@ -153,3 +154,11 @@ os.environ['SECRET_KEY'] = "nice try"
 release: python manage.py makemigrations && python manage.py migrate
 web: gunicorn projectName.wsgi
 ```
+
+### HEROKU :
+
+- add the following key/value pairs to `configvars`
+- key: `DATABASE_URL` | value: `same as env.py file`
+- key: `SECRET_KEY` | value: `same as env.py file`
+- key: `CLOUDINARY_URL` | value: `same as env.py file`
+- key: `DISABLE_COLLECTSTATIC` | value: `1`
