@@ -16,7 +16,7 @@ class Practitioner(models.Model):
     lName = models.CharField(max_length=50, blank=False, null=False)
     title = models.CharField(max_length=50, blank=False, null=False)
     bio = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='imgaes/')
+    image = models.ImageField(upload_to='images/')
     personalExperience = models.TextField(blank=True, null=True)
     language = models.ForeignKey(
         Language,
