@@ -119,11 +119,14 @@ MIDDLEWARE = [
 #     ]
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
+        'http://localhost:3000',
+        'http://localhost:8000',
+        'http://localhost:8080',
+        'http://localhost:5173',
+        'http://localhost:5174',
         os.environ.get('CLIENT_ORIGIN'),
         os.environ.get('CLIENT_ORIGIN_DEV'),
     ]
-else:
-    CORS_ALLOWED_ORIGINS = []
 
 CORS_ALLOW_HEADERS = list(default_headers)
 
@@ -135,6 +138,7 @@ CSRF_TRUSTED_ORIGINS = [os.environ.get(
 )]
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'shs_drf.urls'
 
