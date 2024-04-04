@@ -11,11 +11,13 @@ class Location(models.Model):
     email = models.EmailField()
     streetNum = models.CharField(max_length=50)
     street = models.CharField(max_length=100)
+    area = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
     postcode = models.PositiveIntegerField(blank=False)
     gRating = models.URLField()
     gMap = models.URLField()
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     language = models.ForeignKey(
         Language,
         on_delete=models.SET_NULL,
