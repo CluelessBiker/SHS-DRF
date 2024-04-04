@@ -13,13 +13,17 @@
 - Start a Django project : `django-admin startproject projectName .`
 - Start a Django app : `python3 manage.py startapp AppNameHere`
 - each django app needs to be added to the `INSTALLED_APPS` in `settings.py`:
-
 ```
 'contact',
 'locations',
 'hours',
 'practitioners',
 'services',
+```
+- migrate changes after each app:
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
 ```
 
 ### PACKAGES :
