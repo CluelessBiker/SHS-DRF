@@ -41,4 +41,6 @@ class LocationSerializer(serializers.ModelSerializer):
             'gMap',
             'image',
             'language',
+            'area',
+            'description',
         ]
