@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from .models import Service
 from locations.serializers import LocationSerializer
+from languages.serializers import LanguageSerializer
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     """
     Serializer for Service models
     """
-    language = serializers.ReadOnlyField(source='language.name')
+    language = LanguageSerializer(many=True, read_only=True)
     locations = LocationSerializer(many=True, read_only=True)
     
     def validate_image(self, value):
