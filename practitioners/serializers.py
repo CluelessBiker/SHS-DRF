@@ -2,13 +2,14 @@ from rest_framework import serializers
 from .models import Practitioner
 from locations.serializers import LocationSerializer
 from services.serializers import ServiceSerializer
+from languages.serializers import LanguageSerializer
 
 
 class PractitionerSerializer(serializers.ModelSerializer):
     """
     Serializer for Practitioner models
     """
-    language = serializers.ReadOnlyField(source='language.name')
+    language = LanguageSerializer(many=True, read_only=True)
     locations = LocationSerializer(many=True, read_only=True)
     services = ServiceSerializer(many=True, read_only=True)
 
@@ -51,6 +52,7 @@ class PractitionerDetailSerializer(PractitionerSerializer):
     Serializer for the Practitioner model used in Detail view
     Allow editing locations & services
     """
+    language = serializers.ReadOnlyField(source='language.name')
     locations = LocationSerializer(many=True, read_only=True)
     services = ServiceSerializer(many=True, read_only=True)
 
