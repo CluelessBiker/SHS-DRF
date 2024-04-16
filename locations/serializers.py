@@ -1,13 +1,15 @@
 from rest_framework import serializers
 from .models import Location
+from languages.serializers import LanguageSerializer
 
 
 class LocationSerializer(serializers.ModelSerializer):
+    language = LanguageSerializer(many=True, read_only=True)
+
     def validate_image(self, value):
         """
         Check image size
         """
-        language = serializers.ReadOnlyField(source='language.name')
 
         if value.size > 2 * 1024 * 1024:
             raise serializers.ValidationError('Image size larger than 2MB!')
