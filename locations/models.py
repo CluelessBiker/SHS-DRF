@@ -15,8 +15,8 @@ class Location(models.Model):
     city = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     postcode = models.PositiveIntegerField(blank=False)
-    gRating = models.URLField()
-    gMap = models.URLField()
+    gRating = models.URLField(max_length=500, blank=True, null=True)
+    gMap = models.URLField(max_length=500, blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     language = models.ForeignKey(
         Language,
