@@ -3,5 +3,5 @@ from practitioners import views
 
 urlpatterns = [
     path('practitioners/', views.PractitionerList.as_view()),
-    path('practitioners/<int:pk>', views.PractitionerDetail.as_view()),
+    path('practitioners/<int:pk>/', views.PractitionerDetail.as_view()),
 ]
