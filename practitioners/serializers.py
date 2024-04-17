@@ -44,6 +44,7 @@ class PractitionerSerializer(serializers.ModelSerializer):
             'image',
             'personalExperience',
             'language',
+            'primary',
         ]
 
 
