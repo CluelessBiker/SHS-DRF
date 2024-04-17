@@ -23,15 +23,15 @@ class ServiceList(generics.ListCreateAPIView):
         DjangoFilterBackend,
     ]
 
-    filterset_fields = [
-        'location__title',
-    ]
-
-    search_fields = [
-        'location__title',
-        'location__city',
-        'title',
-    ]
+#     filterset_fields = [
+#         'location__title',
+#     ]
+#
+#     search_fields = [
+#         'location__title',
+#         'location__city',
+#         'title',
+#     ]
 
     def perform_create(self, serializer):
         """
@@ -43,7 +43,7 @@ class ServiceList(generics.ListCreateAPIView):
 class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve/update/delete an entry
-    if looged in & admin
+    if logged in & admin
     """
     permission_classes = [
         IsAdminOrReadOnly,
