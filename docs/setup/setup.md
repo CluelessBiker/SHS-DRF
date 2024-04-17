@@ -81,7 +81,7 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 ```
 
-- update DB settings :
+- update DB settings : hosting now done by [NEON](https://console.neon.tech/app/projects)
 
 ```
 if 'DEV' in os.environ:
@@ -93,7 +93,17 @@ if 'DEV' in os.environ:
     }
 else:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('PGDATABASE'),
+            'USER': os.environ.get('PGUSER'),
+            'PASSWORD': os.environ.get('PASSWORD'),
+            'HOST': os.environ.get('PGHOST'),
+            'PORT': os.environ.get('PGPORT', 5432),
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+        }
     }
 ```
 
@@ -145,8 +155,11 @@ path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
 import os
 os.environ['CLOUDINARY_URL'] = 'cloudinary://yourAPIEnvironmentVariable'
 os.environ['DEV'] = '1'
-os.environ['DATABASE_URL'] = "postgres://yourElephantSQLinkHere"
 os.environ['SECRET_KEY'] = "nice try"
+os.environ['PGHOST']='ep-old-firefly-a2zzo1bv.eu-central-1.aws.neon.tech'
+os.environ['PGDATABASE']='****'
+os.environ['PGUSER']='****'
+os.environ['PGPASSWORD']='*****'
 ```
 
 ### PROCFILE :
@@ -165,4 +178,8 @@ web: gunicorn projectName.wsgi
 - key: `DATABASE_URL` | value: `same as env.py file`
 - key: `SECRET_KEY` | value: `same as env.py file`
 - key: `CLOUDINARY_URL` | value: `same as env.py file`
+- key: `PGHOST` | value: `same as env.py file`
+- key: `PGDATABASE` | value: `same as env.py file`
+- key: `PGUSER` | value: `same as env.py file`
+- key: `PGPASSWORD` | value: `same as env.py file`
 - key: `DISABLE_COLLECTSTATIC` | value: `1`
