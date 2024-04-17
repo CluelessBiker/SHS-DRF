@@ -62,8 +62,6 @@ python3 manage.py migrate
 'corsheaders',
 ```
 
-- Add `'whitenoise.middleware.WhiteNoiseMiddleware',` inside `MIDDLEWARE` directly beneath `SecurityMiddleware`
-
 - Add an import statement `import dj_database_url`
 - Add additional variables to `sesttings.py`:
 
@@ -114,9 +112,12 @@ else:
 - update `ALLOWED_HOSTS = ['localhost', 'shs-drf.herokuapp.com']`
 
 - add line to top of `MIDDLEWARE` array :
-
 ```
 'corsheaders.middleware.CorsMiddleware',
+```
+- still inside `MIDDLEWARE` directly beneath `SecurityMiddleware`, add:
+```
+'whitenoise.middleware.WhiteNoiseMiddleware',
 ```
 
 - below `MIDDLEWARE` add `ALLOWED_ORIGINS`
@@ -132,6 +133,14 @@ else:
     ]
 
 CORS_ALLOW_CREDENTIALS = True
+```
+
+- finally for whitenoise, add the following STATIC settings:
+```
+if 'DEV' in os.environ:
+    STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 ```
 
 ### SETTINGS.PY :
