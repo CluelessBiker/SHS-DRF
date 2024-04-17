@@ -8,7 +8,7 @@ class ServiceSerializer(serializers.ModelSerializer):
     """
     Serializer for Service models
     """
-    language = LanguageSerializer(many=True, read_only=True)
+    language = LanguageSerializer(read_only=True)
     locations = LocationSerializer(many=True, read_only=True)
     
     def validate_image(self, value):

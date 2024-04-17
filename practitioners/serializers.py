@@ -9,7 +9,7 @@ class PractitionerSerializer(serializers.ModelSerializer):
     """
     Serializer for Practitioner models
     """
-    language = LanguageSerializer(many=True, read_only=True)
+    language = LanguageSerializer(read_only=True)
     locations = LocationSerializer(many=True, read_only=True)
     services = ServiceSerializer(many=True, read_only=True)
 

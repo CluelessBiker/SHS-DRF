@@ -4,7 +4,7 @@ from languages.serializers import LanguageSerializer
 
 
 class LocationSerializer(serializers.ModelSerializer):
-    language = LanguageSerializer(many=True, read_only=True)
+    language = LanguageSerializer(read_only=True)
 
     def validate_image(self, value):
         """
