@@ -23,10 +23,11 @@ class Practitioner(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    primary = models.BooleanField(default=False, blank=False, null=False)
 
     class Meta:
         """ Ordering """
-        ordering = ['-createdAt']
+        ordering = ['primary']
 
     def __str__(self):
         """ Display text """
