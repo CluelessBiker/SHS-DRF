@@ -196,7 +196,7 @@ else:
             'OPTIONS': {
                 'sslmode': 'require',
             },
-      }
+        }
     }
 #  <---- ElephanSQL ---->
 #     DATABASES = {
