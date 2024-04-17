@@ -42,6 +42,8 @@ python3 manage.py migrate
 - `dj_database_url==0.5.0 psycopg2`
 - `gunicorn`
 - `django-cors-headers`
+- `whitenoise` _format django admin panel in prod_
+
 
 - remember to run `pip3 freeze --local > requirements.txt` at the end of installation
 - the following packages also need to be added to `INSTALLED_APPS`:
@@ -59,6 +61,8 @@ python3 manage.py migrate
 'dj_rest_auth.registration',
 'corsheaders',
 ```
+
+- Add `'whitenoise.middleware.WhiteNoiseMiddleware',` inside `MIDDLEWARE` directly beneath `SecurityMiddleware`
 
 - Add an import statement `import dj_database_url`
 - Add additional variables to `sesttings.py`:
