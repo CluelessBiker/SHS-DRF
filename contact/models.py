@@ -11,6 +11,7 @@ class Contact(models.Model):
     message = models.TextField()
     email = models.CharField(max_length=100, blank=False, null=False)
     phone = models.CharField(max_length=100, blank=False, null=False)
+    read = models.BooleanField(default=False, null=False, blank=False)
 
     class Meta:
         """ Ordering messages by date created """
