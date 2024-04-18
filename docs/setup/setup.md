@@ -196,3 +196,43 @@ web: gunicorn projectName.wsgi
 - key: `PGUSER` | value: `same as env.py file`
 - key: `PGPASSWORD` | value: `same as env.py file`
 - key: `DISABLE_COLLECTSTATIC` | value: `1`
+
+### DJANGO EMAILS :
+- in `settings.py` add:
+```
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+```
+- add the hidden values to the `env.py` file - EMAIL_HOST_PASSWORD can be obtained from [gmail - app passwords](https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4MiNMI00Y92NLcRko2H7anRwnL85UsEqLEOAugDkIbMWRZPBCcv6UAcNnLuWInChQvE0FSoYP_xLe_RszCZp4b0NueuVHtLDruGUek8abnMU7YlArw)
+- add the same key/value pairs to the `Heroku configvars`
+- at the top of `views.py` import:
+```
+from django.core.mail import send_mail
+from django.conf import settings
+```
+- finally update the `def perform_cerate` :
+```
+instance = serializer.save()
+subject = f"SHS Contact Form : {instance.subject}"
+message = (
+    "Senders details\n"
+    f"Name: {instance.name}\n"
+    f"Email: {instance.email}\n"
+    f"Phone: {instance.phone}\n\n"
+    f"Subject: {instance.subject}\n"
+    f"Message: {instance.message}"
+)
+from_email = instance.email
+to_email = [settings.DEFAULT_FROM_EMAIL]
+send_mail(
+    subject,
+    message,
+    from_email,
+    to_email,
+)
+```
