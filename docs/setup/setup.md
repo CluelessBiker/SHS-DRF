@@ -215,7 +215,7 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 from django.core.mail import send_mail
 from django.conf import settings
 ```
-- finally update the `def perform_cerate` :
+- finally update the `def perform_create` :
 ```
 instance = serializer.save()
 subject = f"SHS Contact Form : {instance.subject}"
