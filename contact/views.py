@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .models import Contact
 from .serializers import ContactSerializer
 from shs_drf.permissions import IsAdminOrReadOnly
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class ContactList(generics.ListCreateAPIView):
@@ -21,8 +23,26 @@ class ContactList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """
         submit a message
+        Send email to client via Django emails
         """
-        serializer.save()
+        instance = serializer.save()
+        subject = f"SHS Contact Form : {instance.subject}"
+        message = (
+            "Senders details:\n"
+            f"Name: {instance.name}\n"
+            f"Email: {instance.email}\n"
+            f"Phone: {instance.phone}\n\n"
+            f"Subject: {instance.subject}\n"
+            f"Message: {instance.message}"
+        )
+        from_email = instance.email
+        to_email = [settings.DEFAULT_FROM_EMAIL]
+        send_mail(
+            subject,
+            message,
+            from_email,
+            to_email,
+        )
 
 
 class ContactDetail(generics.RetrieveDestroyAPIView):
