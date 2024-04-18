@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import Contact
 from .serializers import ContactSerializer
 from shs_drf.permissions import IsAdminOrReadOnly
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail
 from django.conf import settings
 
 
@@ -37,12 +37,15 @@ class ContactList(generics.ListCreateAPIView):
         )
         from_email = instance.email
         to_email = [settings.DEFAULT_FROM_EMAIL]
-        send_mail(
-            subject,
-            message,
-            from_email,
-            to_email,
-        )
+        try:
+            send_mail(
+                subject,
+                message,
+                from_email,
+                to_email,
+            )
+        except BadHeaderError as e:
+            print(f"Error sending email: {e}")
 
 
 class ContactDetail(generics.RetrieveDestroyAPIView):
