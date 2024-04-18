@@ -17,4 +17,5 @@ class ContactSerializer(serializers.ModelSerializer):
             'email',
             'subject',
             'message',
+            'read',
         ]
