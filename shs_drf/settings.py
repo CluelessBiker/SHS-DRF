@@ -153,17 +153,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'shs_drf.wsgi.application'
 
+# <---- DJANGO EMAILS ---->
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#  <---- DEV DB ---->
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 #  <---- PRODUCTION DB ---->
 # DATABASES = {
 #     'default': {
