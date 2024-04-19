@@ -126,10 +126,10 @@ CORS_ALLOW_HEADERS = list(default_headers)
 
 CORS_ALLOW_METHODS = list(default_methods)
 
-CSRF_TRUSTED_ORIGINS = [os.environ.get(
-    'CLIENT_ORIGIN_DEV',
-    'CLIENT_ORIGIN',
-)]
+CSRF_TRUSTED_ORIGINS = [
+    'http://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
+    'https://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
+]
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
