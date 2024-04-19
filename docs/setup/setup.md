@@ -236,3 +236,8 @@ send_mail(
     to_email,
 )
 ```
+
+#### EMAILS BUG :
+- in production, submitting the contact form produced the following error : `SMTP.starttls() got an unexpected keyword argument 'keyfile'`
+- as a completed contact form was visible in the admin panel, however an email was not showing up in my inbox, I googled the error.
+- upgrading from `Django==3.2.23` to `Django==4.2.7` resolved the issue
