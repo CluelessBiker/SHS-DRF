@@ -35,13 +35,15 @@ class ContactList(generics.ListCreateAPIView):
             f"Subject: {instance.subject}\n"
             f"Message: {instance.message}"
         )
-        from_email = instance.email
+#         from_email = instance.email
+        sender = f"Formal Name <{instance.email}>"
         to_email = [settings.DEFAULT_FROM_EMAIL]
         try:
             send_mail(
                 subject,
                 message,
-                from_email,
+#                 from_email,
+                sender
                 to_email,
             )
         except BadHeaderError as e:
