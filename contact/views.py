@@ -19,6 +19,8 @@ class ContactList(generics.ListCreateAPIView):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Contact.objects.all()
+        else:
+            return Contact.objects.none()
 
     def perform_create(self, serializer):
         """
