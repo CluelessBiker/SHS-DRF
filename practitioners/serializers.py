@@ -33,18 +33,20 @@ class PractitionerSerializer(serializers.ModelSerializer):
         model = Practitioner
         fields = [
             'id',
-            'locations',
-            'services',
             'createdAt',
             'updatedAt',
+            'primary',
+            'prefix',
             'fName',
             'lName',
+            'degree',
             'title',
+            'locations',
+            'services',
             'bio',
-            'image',
             'personalExperience',
+            'image',
             'language',
-            'primary',
         ]
 
 
