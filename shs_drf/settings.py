@@ -34,9 +34,9 @@ REST_FRAMEWORK = {
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 30,
+#     'DEFAULT_PAGINATION_CLASS':
+#         'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 30,
 }
 
 if 'DEV' not in os.environ:
@@ -58,8 +58,8 @@ JWT_AUTH_SAMESITE = 'None'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = 'DEV' in os.environ
-DEBUG = True
+DEBUG = 'DEV' in os.environ
+# DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
