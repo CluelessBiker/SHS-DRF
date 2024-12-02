@@ -108,7 +108,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -131,10 +130,8 @@ CORS_ALLOW_METHODS = list(default_methods)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
-#     'http://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
-#     'https://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
-    'https://' + os.environ.get('CLIENT_ORIGIN'),
-    'https://' + os.environ.get('CLIENT_ORIGIN_DEV', ''),
+    'http://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
+    'https://' + os.environ.get('CLIENT_ORIGIN_DEV', 'CLIENT_ORIGIN'),
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -252,8 +249,6 @@ if 'DEV' in os.environ:
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
