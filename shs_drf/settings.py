@@ -65,6 +65,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     os.environ.get('ALLOWED_HOST'),
+    'shs-drf.herokuapp.com',
 ]
 
 # Application definition
